@@ -2,7 +2,7 @@ from gevent import monkey
 from gevent import pywsgi
 from flask import Flask, request, render_template
 import argparse
-from summarizer import summarize
+from summarizer import summarize, load_fine_tuned_model
 import torch
 import os
 
@@ -18,6 +18,7 @@ def set_args():
 def start_sever():
     args = set_args()
     app = Flask(__name__)
+    model,tokenizer = load_fine_tuned_model()
 
     @app.route('/')
     def index():
@@ -27,6 +28,7 @@ def start_sever():
     def response_request():
         if request.method == 'GET':
             return render_template("index.html")
+
         news_text = request.form.get('news_text')
         temp_max_length = request.form.get('max_length')
         temp_top_k = request.form.get('top_k')
@@ -34,7 +36,7 @@ def start_sever():
         max_length = int(temp_max_length) if isinstance(temp_max_length, str) and temp_max_length.isdigit() else 250
         top_k = int(temp_top_k) if isinstance(temp_top_k, str) and temp_top_k.isdigit() else 5
         top_p = int(temp_top_p) if isinstance(temp_top_p, str) and temp_top_p.isdigit() else 0.7
-        summary = summarize(article=news_text, max_length=max_length, top_k=top_k, top_p=top_p)
+        summary = summarize(model=model, tokenizer=tokenizer, article=news_text, max_length=max_length, top_k=top_k, top_p=top_p)
         return render_template("post_index.html",
                                 news_text=news_text,
                                 summary=summary,

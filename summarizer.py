@@ -18,14 +18,14 @@ def combined_score(summary, score, length_weight=0.5):
     length = len(summary)
     return score / (length ** length_weight)
 
-def summarize(article,
+def summarize(model,
+              tokenizer,
+              article,
               max_length=250,
               top_k=5,
               top_p=0.7):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     input_text = prepare_input_for_generation(article)
-    model,tokenizer = load_fine_tuned_model()
-
     input_ids = tokenizer.encode(input_text, return_tensors='pt').to(device)
 
     generated_sequences = model.generate(
