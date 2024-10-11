@@ -1,7 +1,7 @@
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import torch
 
-model_dir="./fine_tuned_model_LR2"
+model_dir="./fine_tuned_model"
 
 def load_fine_tuned_model():
     tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
