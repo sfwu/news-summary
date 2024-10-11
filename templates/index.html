@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News-Summarizer</title>
+</head>
+<body>
+<header>
+    <h1 align="center"> A News Summarizer - 520 Project </h1>
+    <style>
+        .inline-textarea {
+            display: inline-block;
+            vertical-align: top;
+            width: 200px;
+            height: 40px;
+            border: 1px solid #000;
+            margin-right: 10px;
+        }
+    </style>
+</header>
+<div align="center" style="margin-top:15px">
+    <div style="font-size:20px">News input:</div>
+    <form method="POST" name="form1">
+        <textarea type="text" name="news_text" rows="10"
+                  style="width:800px; height:120px;border: 1px solid #000; word-wrap:break-word;overflow: scroll">{{ "Enter news here" }}
+        </textarea>
+
+        <div style="margin-top:15px;">
+            <div style="font-size:20px">Result tuning parameters: (max_length, top_k, top_p)</div>
+            <textarea name="max_length" rows="2" class="inline-textarea">{{ "Enter max length" }}</textarea>
+            <textarea name="top_k" rows="2" class="inline-textarea">{{ "Enter top_k" }}</textarea>
+            <textarea name="top_p" rows="2" class="inline-textarea">{{ "Enter top_p" }}</textarea>
+        </div>
+
+        <div>
+            <input type="submit" value="Summarize it!" style="font-size:16px"/>
+        </div>
+        <div style="padding:30px;"></div>
+        <div style="font-size:20px">Summary:</div>
+        <textarea type="text" name="summary" readonly="readonly"  rows="10"
+                  style="width:800px; height:120px;border: 1px solid #000; word-wrap:`eak-word;overflow: scroll">{{ "" }}
+        </textarea>
+    </form>
+</div>
+
+</body>
+</html>
