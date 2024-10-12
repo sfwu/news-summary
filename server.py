@@ -12,20 +12,14 @@ st.set_page_config(page_title="520 project Demo", initial_sidebar_state="auto", 
 
 model_dir_name = 'fine_tuned_model'
 model_dir=f"{os.getcwd()}/{model_dir_name}"
-google_folder_id="'1KGfBg_uCMg5AnzNcAojAhbqiO13gw6u6'"
+google_folder_id="1KGfBg_uCMg5AnzNcAojAhbqiO13gw6u6"
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def get_model():
-    download_model(google_folder_id,model_dir_name)
+    download_model(google_folder_id,model_dir)
     tokenizer = T5Tokenizer.from_pretrained(model_dir)
     model = T5ForConditionalGeneration.from_pretrained(model_dir)
     return tokenizer, model
-
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-tokenizer, model = get_model()
-model.to(device)
-
 
 def app():
     st.markdown(
@@ -52,4 +46,7 @@ def app():
         st.stop()
 
 if __name__ == '__main__':
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer, model = get_model()
+    model.to(device)
     app()

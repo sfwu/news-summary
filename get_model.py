@@ -1,10 +1,12 @@
 import os
+import time
+
 import gdown
 
 def download_model(folder_id, local_dir):
 
-    # Check if the local directory exists
     if os.path.exists(local_dir):
+        print(f"{local_dir} already exists!")
         return
     else:
         os.makedirs(local_dir)
