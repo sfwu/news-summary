@@ -21,7 +21,7 @@ def load_input_dataset_files():
     return files
 
 def short_text(df):
-    # remove all the rows having text longer than 900 words
+    # remove all the rows having text longer than 500 words
     df['article_length'] = df['article'].apply(lambda x: len(x.split()))
     df['summary_length'] = df['highlights'].apply(lambda x: len(x.split()))
 
