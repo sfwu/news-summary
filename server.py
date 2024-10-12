@@ -2,6 +2,7 @@ import streamlit as st
 from summarizer import summarize
 import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+from get_model import download_model
 
 import os
 import time
@@ -9,10 +10,13 @@ import time
 
 st.set_page_config(page_title="520 project Demo", initial_sidebar_state="auto", layout="wide")
 
-model_dir=f"{os.getcwd()}/fine_tuned_model"
+model_dir_name = 'fine_tuned_model'
+model_dir=f"{os.getcwd()}/{model_dir_name}"
+google_folder_id="'1KGfBg_uCMg5AnzNcAojAhbqiO13gw6u6'"
 
 @st.cache(allow_output_mutation=True)
 def get_model():
+    download_model(google_folder_id,model_dir_name)
     tokenizer = T5Tokenizer.from_pretrained(model_dir)
     model = T5ForConditionalGeneration.from_pretrained(model_dir)
     return tokenizer, model
