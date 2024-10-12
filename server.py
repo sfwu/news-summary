@@ -28,8 +28,8 @@ def app():
         """
     )
     st.sidebar.subheader("Parameters")
-    max_length = st.sidebar.slider("max_length", min_value=50, max_value=150, value=100, step=1)
-    top_k = st.sidebar.slider("top_k", min_value=10, max_value=50, value=30, step=1)
+    max_length = st.sidebar.slider("max_length", min_value=0, max_value=200, value=100, step=1)
+    top_k = st.sidebar.slider("top_k", min_value=0, max_value=100, value=50, step=1)
     top_p = st.sidebar.slider("top_p", min_value=0.0, max_value=1.0, value=1.0, step=0.01)
 
 
