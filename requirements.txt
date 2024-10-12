@@ -37,3 +37,6 @@ zope.event==5.0
 zope.interface==7.0.3
 sentencepiece==0.2.0
 
+
+contractions~=0.1.73
+datasets~=3.0.1
